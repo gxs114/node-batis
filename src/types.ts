@@ -1,9 +1,12 @@
 import { helper } from "./helper"
 
-export type SqlPool = Map<string, {
-  sql: SqlMap,
-  fragment: FragmentMap
-}>
+export type SqlPool = Map<
+  string,
+  {
+    sql: SqlMap
+    fragment: FragmentMap
+  }
+>
 
 export type Node = {
   type: string
@@ -14,4 +17,7 @@ export type Node = {
 }
 
 export type FragmentMap = Map<string, string>
-export type SqlMap = Map<string, (value: any, helperFn?: typeof helper) => string>
+export type SqlMap = Map<
+  string,
+  (value: any, helperFn?: typeof helper) => string
+>

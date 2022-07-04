@@ -5,8 +5,6 @@ import * as fg from "fast-glob"
 import { parseXML } from "./parseXML"
 import { SqlPool } from "./types"
 
-
-
 interface NodeBatisOptions {
   entities: string | string[]
   exec: (sql: string) => any
@@ -29,11 +27,15 @@ export class NodeBatis {
 
   public xmLPath: string[]
 
-  constructor (options: NodeBatisOptions) {
+  constructor(options: NodeBatisOptions) {
     this.options = options
 
     const { entities } = options
-    this.xmLPath = fg.sync(Array.isArray(entities) ? entities.map(this.resolvePath.bind(this)) : [this.resolvePath(entities)])
+    this.xmLPath = fg.sync(
+      Array.isArray(entities)
+        ? entities.map(this.resolvePath.bind(this))
+        : [this.resolvePath(entities)]
+    )
     this.xmLPath.forEach(path => {
       const { name } = parse(path)
       const [fragment, sql] = parseXML(path)
@@ -43,12 +45,15 @@ export class NodeBatis {
     activeInstance = this as any
   }
 
-  getSql (mapperId: string, sqlId: string, query: unknown) {
+  getSql(mapperId: string, sqlId: string, query: unknown) {
     const map = this.sqlMap
     const mapper = map.get(mapperId)
 
     if (!mapper) {
-      throw "[node-batis getSql error]: 当前获取的 sql mapper 不存在，mapperId 为" + mapperId
+      throw (
+        "[node-batis getSql error]: 当前获取的 sql mapper 不存在，mapperId 为" +
+        mapperId
+      )
     }
 
     const sqlFactory = mapper.sql.get(sqlId)
@@ -59,15 +64,15 @@ export class NodeBatis {
 
     try {
       return sqlFactory(query)
-    }
-    catch (e: any) {
-      console.error(`[node-batis getSql error]: 当前 sql 创建 ${mapperId}.${sqlId} 出错`)
+    } catch (e: any) {
+      console.error(
+        `[node-batis getSql error]: 当前 sql 创建 ${mapperId}.${sqlId} 出错`
+      )
       throw e
     }
   }
 
-  resolvePath (p: string) {
+  resolvePath(p: string) {
     return resolve(this.root, p) + "/**/*.xml"
   }
 }
-

@@ -1,5 +1,15 @@
 {
   "cSpell.words": [
-    "batis"
-  ]
+    "batis",
+    "sqlstring",
+    "usagisah"
+  ],
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
