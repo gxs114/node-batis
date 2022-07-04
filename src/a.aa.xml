@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<content>
+  <!-- sql 字符串碎片 -->
+  <fragment id="aaa">
+    id,name
+    <p>123</p>
+  </fragment>
+
+
+  <sql id="abc">
+    select
+    <include refid="aaa"></include>
+    from user
+    <where>
+      <if test="ids and ids.length > 0">
+        and id in
+        <for collection="ids" item="id" separator="," open="(" close=")">
+          <if test="id > 0">
+            #{id}
+          </if>
+        </for>
+      </if>
+
+      <if test="name">
+        and name = #{name}
+      </if>
+    </where>
+  </sql>
+</content> 
