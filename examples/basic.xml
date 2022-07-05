@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <content>
-  <!-- sql 字符串碎片 -->
-  <fragment id="aaa">
+  <!-- commont -->
+  <fragment id="user-frg">
     id,name
-    <p>123</p>
   </fragment>
 
 
-  <sql id="abc">
+  <sql id="user">
     select
-    <include refid="aaa"></include>
+    <include refid="user-frg"></include>
     from user
     <where>
       <if test="ids and ids.length > 0">

@@ -24,6 +24,7 @@
     "prettier-config-usagisah": "^1.0.1"
   },
   "dependencies": {
+    "fast-glob": "^3.2.11",
     "htmlparser2": "^8.0.1",
     "sqlstring": "^2.3.3"
   }

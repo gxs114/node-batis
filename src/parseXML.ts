@@ -4,8 +4,10 @@ import * as htmlparser2 from "htmlparser2"
 
 import { Node, FragmentMap, SqlMap } from "./types"
 
-export function parseXML(path: string) {
-  const template = readFileSync(path, "utf-8")
+export function parseXML(pathOrTemplate: string, isTemplate = false) {
+  const template = isTemplate
+    ? pathOrTemplate
+    : readFileSync(pathOrTemplate, "utf-8")
   const doc = htmlparser2.parseDocument(template)
   return parseSqlNode(doc as any)
 }
